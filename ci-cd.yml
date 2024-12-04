@@ -11,8 +11,11 @@ deploy:
     with:
       version: 'v1.29.2'
 
+  - name: Configure kubeconfig
+    run: |
+      echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
+      chmod 600 $HOME/.kube/config
+
   - name: Deploy to Kubernetes
-    env:
-      KUBECONFIG: ${{ secrets.KUBECONFIG }}
     run: |
       kubectl apply -f k8s-deployment.yml
