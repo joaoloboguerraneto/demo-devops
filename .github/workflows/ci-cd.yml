@@ -42,8 +42,8 @@ jobs:
       - name: Configure kubeconfig
         run: |
           mkdir -p $HOME/.kube
-          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/devops
-          chmod 600 $HOME/.kube/devops
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
           kubectl config use-context minikube
 
       - name: Test Kubernetes connection
