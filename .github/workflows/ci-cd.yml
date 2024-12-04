@@ -41,8 +41,9 @@ jobs:
 
       - name: Configure kubeconfig
         run: |
-          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/minikube
-          chmod 600 $HOME/.kube/minikube
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/devops
+          chmod 600 $HOME/.kube/devops
 
       - name: Deploy to Kubernetes
         run: |
