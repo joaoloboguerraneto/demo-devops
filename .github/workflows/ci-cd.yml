@@ -33,11 +33,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      
+      - name: Start Minikube
+        run: |
+          minikube start --driver=none
+          minikube status
 
       - name: Set up kubectl
         uses: azure/setup-kubectl@v3
         with:
           version: 'v1.29.2'
+      
+      - name: Configure kubectl for Minikube
+        run: |
+          kubectl config use-context minikube
 
       - name: Deploy to Minikube
         run: |
