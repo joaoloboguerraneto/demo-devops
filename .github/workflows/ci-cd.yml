@@ -39,18 +39,10 @@ jobs:
         with:
           version: 'v1.29.2'
 
-      - name: Configure kubeconfig
-        run: |
-          mkdir -p $HOME/.kube
-          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/minikube
-          chmod 600 $HOME/.kube/minikube
-          kubectl config use-context minikube
-
-      - name: Test Kubernetes connection
-        run: |
-          kubectl cluster-info
-          kubectl get nodes
-
-      - name: Deploy to Kubernetes
+      - name: Deploy to Minikube
         run: |
           kubectl apply -f k8s-deployment.yml --validate=false
+
+      - name: Test Service URLs
+        run: |
+          minikube service list
