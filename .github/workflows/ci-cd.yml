@@ -23,5 +23,5 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-          docker tag demo-app YOUR_DOCKER_HUB_USERNAME/demo-app:latest
-          docker push YOUR_DOCKER_HUB_USERNAME/demo-app:latest
+          docker tag demo-app rhavis/demo-app:latest
+          docker push rhavis/demo-app:latest
