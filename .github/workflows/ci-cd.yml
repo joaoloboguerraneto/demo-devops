@@ -42,7 +42,7 @@ jobs:
       - name: Configure kubeconfig
         run: |
           mkdir -p $HOME/.kube
-          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/minikube
+          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/minikube
           chmod 600 $HOME/.kube/minikube
           kubectl config use-context minikube
 
