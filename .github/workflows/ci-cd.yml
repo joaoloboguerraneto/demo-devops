@@ -44,7 +44,13 @@ jobs:
           mkdir -p $HOME/.kube
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/devops
           chmod 600 $HOME/.kube/devops
+          kubectl config use-context minikube
+
+      - name: Test Kubernetes connection
+        run: |
+          kubectl cluster-info
+          kubectl get nodes
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f k8s-deployment.yml
+          kubectl apply -f k8s-deployment.yml --validate=false
